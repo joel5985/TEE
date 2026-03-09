@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Einstein Experience • Official Site | Multilingual Live Band Bengaluru</title>
+  <meta name="description" content="The Einstein Experience is a Bengaluru-based multilingual live music band delivering energetic Bollywood/Hollywood/Sufi/Ghazals/Folk performances for weddings, corporate events, clubs and parties." />
+  <link rel="canonical" href="https://theeinsteinexperience.com/" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Einstein Experience" />
+  <meta property="og:title" content="The Einstein Experience • Multilingual Live Band" />
+  <meta property="og:description" content="Energetic multilingual live performances • Weddings • Corporate • Clubs" />
+  <meta property="og:url" content="https://theeinsteinexperience.com/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1600&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1600&q=80" />
+
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <meta name="theme-color" content="#0b0b0c" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    html{scroll-behavior:smooth}
+    :root{
+      --bg:#0b0b0c; --card:#121216; --ink:#f2f2f2; --muted:#c7c7cf; --brand:#ff5a5f; --accent:#ffd166;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:inherit;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+
+    /* HERO */
+    .hero{position:relative;min-height:72vh;display:grid;place-items:center;overflow:hidden}
+    .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(1.1) contrast(1.05)}
+    .hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:none}
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.75));z-index:1}
+
+    .hero-inner{position:relative;z-index:2;text-align:center;padding:84px 16px 120px;max-width:980px}
+    .hero-title{letter-spacing:.28em;text-transform:uppercase;font-weight:800;font-size:clamp(2.2rem,6vw,4.2rem);margin:0}
+    .hero-sub{margin:8px 0 18px;color:rgba(255,255,255,.85);font-style:italic;font-size:clamp(1.0rem,2.2vw,1.2rem)}
+    .hero-cta{display:inline-flex;align-items:center;justify-content:center;padding:10px 22px;border:1px solid rgba(255,255,255,.6);
+      background:rgba(0,0,0,.35);border-radius:999px;text-transform:uppercase;letter-spacing:.14em;font-size:.8rem}
+
+    /* NAV BAR (overlays bottom of hero; becomes sticky top on scroll) */
+    .navwrap{position:absolute;left:0;right:0;bottom:0;z-index:5;background:rgba(12,12,14,.92);border-top:1px solid rgba(255,255,255,.08);
+      backdrop-filter:saturate(160%) blur(10px)}
+    .navwrap.is-fixed{position:fixed;top:0;bottom:auto;box-shadow:0 12px 26px rgba(0,0,0,.35)}
+
+    .nav{max-width:var(--max);margin:0 auto;padding:14px 18px;display:grid;grid-template-columns:220px 1fr 220px;align-items:center;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.95rem}
+    .brand img{width:32px;height:32px;border-radius:50%}
+
+    .links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+    .links a{opacity:.92;text-transform:uppercase;font-size:.78rem;letter-spacing:.12em}
+    .links a:hover{opacity:1;text-decoration:none}
+
+    .social{display:flex;gap:12px;justify-content:flex-end;align-items:center}
+    .icon{width:18px;height:18px;opacity:.9}
+    .icon:hover{opacity:1}
+
+    .nav-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px;cursor:pointer;justify-self:end}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;opacity:.9}
+
+    /* SECTIONS */
+    section{scroll-margin-top:90px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:60px 18px}
+    .section-title{font-size:clamp(1.4rem,3vw,2.0rem);margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:22px}
+    .grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;overflow:hidden}
+
+    .gallery{columns:3 280px;column-gap:18px}
+    .gallery img{width:100%;border-radius:14px;margin:0 0 18px;break-inside:avoid}
+
+    /* Back to top */
+    .back-to-top{position:fixed;right:18px;bottom:18px;z-index:80;display:none;align-items:center;justify-content:center;
+      width:44px;height:44px;border-radius:999px;background:rgba(255,90,95,.95);color:#000;border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 10px 24px rgba(0,0,0,.35);cursor:pointer}
+    .back-to-top.is-visible{display:flex;opacity:1}
+    .back-to-top svg{width:20px;height:20px}
+
+    /* Mobile */
+    @media (max-width:900px){
+      .nav{grid-template-columns:1fr auto;grid-template-areas:"brand toggle" "links links" "social social";gap:10px}
+      .brand{grid-area:brand}
+      .nav-toggle{display:inline-block;grid-area:toggle}
+      .links{grid-area:links;display:none;justify-content:flex-start}
+      .social{grid-area:social;justify-content:flex-start;display:none}
+      .navwrap.is-open .links, .navwrap.is-open .social{display:flex}
+      .grid.cols2, .grid.cols3{grid-template-columns:1fr}
+      .hero-inner{padding:76px 16px 140px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"MusicGroup",
+    "name":"The Einstein Experience",
+    "url":"https://theeinsteinexperience.com/",
+    "genre":["Bollywood","Hollywood","Sufi","Ghazals","Folk","Pop","Rock"],
+    "foundingLocation":{"@type":"City","name":"Bengaluru"},
+    "sameAs":[
+      "https://www.youtube.com/@theeinsteinexperience",
+      "https://www.instagram.com/theeinsteinexperience/",
+      "https://x.com/TeeLiveBand"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <section class="hero" id="home" aria-label="Hero">
+    <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="/assets/hero-poster.svg">
+      <source id="remoteVideo" src="https://videos.pexels.com/videos/people-watching-a-band-854054" type="video/mp4" />
+      <source src="/assets/hero-video.mp4" type="video/mp4" />
+    </video>
+    <img class="poster" id="heroPoster" src="assets/background.avif" alt="Hero background" />
+    <div class="overlay"></div>
+
+    <div class="hero-inner">
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="80">THE EINSTEIN EXPERIENCE</h1>
+      <div class="hero-sub" data-aos="fade-up" data-aos-delay="140">"Most wanted Multiligual Music Band"</div>
+	  <div class="hero-sub" data-aos="fade-up" data-aos-delay="140">"Hindi | English | Kannada | Tamil | Telugu | Punjabi | etc"</div>
+      <a class="hero-cta" href="#contact" data-aos="zoom-in" data-aos-delay="220">Book us now</a>
+    </div>
+
+    <div class="navwrap" id="navwrap" aria-label="Site navigation">
+      <nav class="nav">
+        <div class="brand"><img src="assets/logo.png" alt="Logo" /><span>THE EINSTEIN EXPERIENCE</span></div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#music">Music</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#achievements">Achievements</a>
+          <a href="#bio">Bio</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="social" id="navSocial">
+          <a class="icon" href="tel:+917676783827" aria-label="Call">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3 5.18 2 2 0 0 1 5.11 3h3a2 2 0 0 1 2 1.72c.12.81.3 1.6.54 2.36a2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 4 4l1.72-1.11a2 2 0 0 1 2.11-.45c.76.24 1.55.42 2.36.54A2 2 0 0 1 22 16.92z"/></svg>
+          </a>
+          <a class="icon" href="https://www.instagram.com/theeinsteinexperience/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+          </a>
+          <a class="icon" href="https://www.youtube.com/theeinsteinexperience" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.5.5a3 3 0 0 0-2.1 2.1A31.6 31.6 0 0 0 2 12a31.6 31.6 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.7.5 7.5.5 7.5.5s5.8 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 22 12a31.6 31.6 0 0 0-.4-4.8ZM10 15.2V8.8L16 12l-6 3.2Z"/></svg>
+          </a>
+          <a class="icon" href="https://x.com/TeeLiveBand" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.5l-5.1-6.6L5.6 22H2.5l7.3-8.4L1.6 2H8.3l4.6 6 6-6Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/></svg>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <main>
+    <section class="wrap" id="music" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="section-title">Originals & Popular Covers</h2>
+      <p class="muted">Stream our latest releases and crowd-favorite live covers.</p>
+      <div class="grid cols" style="margin-top:18px">
+        <div class="grid cols2" style="margin-top:18px">
+  <div class="card" data-aos="fade-right" data-aos-delay="80">
+    <h3>Latest Original: “Tu Raahi Hain”</h3>
+    <a class="video-card" href="https://www.youtube.com/watch?v=sUYk-_U9AWw" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/sUYk-_U9AWw/hqdefault.jpg" alt="Tu Raahi Hain video thumbnail">
+      <span class="play">▶</span>
+    </a>
+    
+  </div>
+
+  <div class="card" data-aos="fade-left" data-aos-delay="120">
+    <h3>Showreel</h3>
+    <a class="video-card" href="https://www.youtube.com/watch?v=UQ2bk5Pximc" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/UQ2bk5Pximc/hqdefault.jpg" alt="Showreel video thumbnail">
+      <span class="play">▶</span>
+    </a>
+    
+  </div>
+  <div class="card" data-aos="fade-left" data-aos-delay="120">
+    <h3>Performances Playlist</h3>
+    <a class="video-card" href="https://www.youtube.com/watch?v=UQ2bk5Pximc" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/UQ2bk5Pximc/hqdefault.jpg" alt="Showreel video thumbnail">
+      <span class="play">▶</span>
+    </a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="gallery" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="section-title">Photos & Videos</h2>
+      <div class="gallery" data-aos="fade-up" data-aos-delay="120">
+        <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1600&q=80" alt="Gallery 1" onerror="this.src='/assets/gallery1.svg'" />
+        <img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?auto=format&fit=crop&w=1600&q=80" alt="Gallery 2" onerror="this.src='/assets/gallery2.svg'" />
+        <img src="https://images.unsplash.com/photo-1655395700006-c27c6480169a?auto=format&fit=crop&w=1600&q=80" alt="Gallery 3" onerror="this.src='/assets/gallery3.svg'" />
+        <img src="https://images.unsplash.com/photo-1700831213672-0961e3637344?auto=format&fit=crop&w=1600&q=80" alt="Gallery 4" onerror="this.src='/assets/gallery4.svg'" />
+        <img src="https://images.unsplash.com/photo-1713885462557-12b5c41f22cd?auto=format&fit=crop&w=1600&q=80" alt="Gallery 5" onerror="this.src='/assets/gallery5.svg'" />
+        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1600&q=80" alt="Gallery 6" onerror="this.src='/assets/gallery6.svg'" />
+      </div>
+    </section>
+
+    <section class="wrap" id="achievements" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="section-title">Achievements</h2>
+      <p class="muted">Awards, milestones, and media mentions.</p>
+      <div class="grid cols3" style="margin-top:18px">
+        <div class="card" data-aos="zoom-in" data-aos-delay="60"><img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?auto=format&fit=crop&w=1600&q=80" alt="Achievement 1" onerror="this.src='/assets/press1.svg'" /></div>
+        <div class="card" data-aos="zoom-in" data-aos-delay="120"><img src="https://images.unsplash.com/photo-1700831213672-0961e3637344?auto=format&fit=crop&w=1600&q=80" alt="Achievement 2" onerror="this.src='/assets/press2.svg'" /></div>
+        <div class="card" data-aos="zoom-in" data-aos-delay="180"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1600&q=80" alt="Achievement 3" onerror="this.src='/assets/press3.svg'" /></div>
+      </div>
+    </section>
+
+    <section class="wrap" id="bio" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="section-title">About</h2>
+      <div class="grid cols2" style="margin-top:18px">
+        <div class="card" data-aos="fade-right" data-aos-delay="80">
+          <h3>Who we are</h3>
+          <p class="muted">A Bengaluru-based multilingual live band delivering energetic Bollywood/Hollywood/Sufi/Ghazals/Folk performances for weddings, corporate events, clubs and celebrations.</p>
+        </div>
+        <div class="card" data-aos="fade-left" data-aos-delay="120">
+          <h3>Band members</h3>
+          <p class="muted">Einstein • Trisha • Joel • Vikram • Midhun</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="contact" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="section-title">Contact</h2>
+      <p class="muted">Bookings: <a href="tel:+917676783827">+91 76767 83827</a></p>
+      <div class="grid cols2" style="margin-top:18px">
+        <div class="card" data-aos="fade-right" data-aos-delay="80">
+          <h3>Enquiry</h3>
+          <form onsubmit="event.preventDefault();alert('Connect this form to your backend (Netlify Forms / serverless).');">
+            <label class="muted">Name<br><input required style="width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0e0e12;color:#fff"/></label><br><br>
+            <label class="muted">Email<br><input type="email" required style="width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0e0e12;color:#fff"/></label><br><br>
+            <label class="muted">Message<br><textarea required rows="5" style="width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0e0e12;color:#fff"></textarea></label><br><br>
+            <button class="hero-cta" type="submit">Send</button>
+          </form>
+        </div>
+        <div class="card" data-aos="fade-left" data-aos-delay="120">
+          <h3>Social</h3>
+          <p class="muted">Instagram: <a href="https://www.instagram.com/theeinsteinexperience/" target="_blank" rel="noopener">@theeinsteinexperience</a></p>
+          <p class="muted">YouTube: <a href="https://www.youtube.com/@theeinsteinexperience" target="_blank" rel="noopener">@theeinsteinexperience</a></p>
+          <p class="muted">X: <a href="https://x.com/TeeLiveBand" target="_blank" rel="noopener">@TeeLiveBand</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap" style="padding-top:24px">
+    <div class="muted">© <span id="year"></span> The Einstein Experience. All rights reserved.</div>
+  </footer>
+
+  <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 4l-7 7 1.4 1.4L11 7.8V20h2V7.8l4.6 4.6L19 11z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // If opened with file://, remote video playback can be blocked by the browser.
+    // We remove the remote source in that case so the page doesn't error.
+    (function(){
+      const isFile = location.protocol === 'file:';
+      const remote = document.getElementById('remoteVideo');
+      const video = document.getElementById('heroVideo');
+      const poster = document.getElementById('heroPoster');
+      if(isFile && remote){
+        remote.remove();
+        setTimeout(()=>{ if(video && video.readyState < 2){ poster.style.display='block'; } }, 600);
+      }
+    })();
+
+    document.addEventListener('DOMContentLoaded', function(){
+      AOS.init({ once:true, duration:800, easing:'ease-out-cubic', offset: 120 });
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const navwrap = document.getElementById('navwrap');
+      const hero = document.getElementById('home');
+      const btt = document.querySelector('.back-to-top');
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const toggle = document.getElementById('navToggle');
+      if(toggle && navwrap){
+        toggle.addEventListener('click', ()=>{
+          const open = navwrap.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        navwrap.querySelectorAll('a[href^="#"]').forEach(a=>{
+          a.addEventListener('click', ()=>{
+            navwrap.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded','false');
+          });
+        });
+      }
+
+      const onScroll = ()=>{
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        navwrap.classList.toggle('is-fixed', heroBottom <= 0);
+        if(btt){ btt.classList.toggle('is-visible', window.scrollY > 600); }
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+
+      if(btt){
+        btt.addEventListener('click', ()=>{
+          window.scrollTo({ top:0, behavior: prefersReduced ? 'auto' : 'smooth' });
+        });
+      }
+
+      const v = document.getElementById('heroVideo');
+      v.addEventListener('error', ()=>{ document.getElementById('heroPoster').style.display='block'; });
+      v.addEventListener('stalled', ()=>{ document.getElementById('heroPoster').style.display='block'; });
+    });
+  </script>
+</body>
+</html>

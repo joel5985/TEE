@@ -115,7 +115,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: clip;
     }
 
     #home video, #home .poster-img {
@@ -178,6 +178,7 @@
     .hero-logo {
       width: 120px; height: 120px;
       border-radius: 50%;
+      margin-top: 80px;
       margin-bottom: 24px;
       filter: drop-shadow(0 0 30px rgba(255,85,0,0.7));
       animation: logoPulse 3s ease-in-out infinite;
@@ -201,7 +202,7 @@
       font-family: var(--font-display);
       font-size: clamp(4rem, 11vw, 9rem);
       line-height: 0.92;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
       color: var(--ink);
       animation: fadeSlideUp 0.8s 0.15s ease both;
@@ -293,29 +294,7 @@
     }
     .btn-ghost:hover { border-color: rgba(255,255,255,0.6); }
 
-    /* Scroll indicator */
-    .scroll-hint {
-      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-      z-index: 4;
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      opacity: 0.5;
-      animation: fadeIn 1.5s 1s ease both;
-    }
-    .scroll-hint span {
-      font-family: var(--font-ui);
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-    }
-    .scroll-line {
-      width: 1px; height: 50px;
-      background: linear-gradient(to bottom, var(--brand), transparent);
-      animation: scrollPulse 1.5s ease-in-out infinite;
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
-      50% { opacity: 1; transform: scaleY(1); }
-    }
+
 
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -488,6 +467,13 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       margin-top: 48px;
+    }
+    .video-card--channel {
+      grid-column: 1 / -1;
+    }
+    .video-card--channel .video-thumb {
+      aspect-ratio: unset !important;
+      height: 90px;
     }
 
     .video-card {
@@ -991,6 +977,7 @@
     /* ─── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 1024px) {
       .video-grid { grid-template-columns: 1fr 1fr; }
+      .video-card--channel { grid-column: 1 / -1; }
       .achievements-grid { grid-template-columns: 1fr 1fr; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
       .bio-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -1009,6 +996,7 @@
       }
       #navwrap.is-open .nav-social { display: flex; }
       .video-grid { grid-template-columns: 1fr; }
+      .video-card--channel { grid-column: 1; }
       .achievements-grid { grid-template-columns: 1fr; }
       .gallery-masonry { columns: 2 200px; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
@@ -1046,7 +1034,6 @@
 
     <div class="hero-inner">
       <img class="hero-logo" src="assets/logo.png" alt="The Einstein Experience logo" />
-      <!-- <div class="hero-eyebrow">Bengaluru · Live Music</div> -->
       <h1 class="hero-title">
         <span class="glow-text">The</span>
         <span class="highlight">Einstein</span>
@@ -1074,10 +1061,7 @@
       </div>
     </div>
 
-    <!-- <div class="scroll-hint" aria-hidden="true"> -->
-      <!-- <span>Scroll</span> -->
-      <!-- <div class="scroll-line"></div> -->
-    <!-- </div> -->
+
   </section>
 
   <!-- ── NAV ──────────────────────────────────────────────── -->
@@ -1107,7 +1091,7 @@
         <a href="https://x.com/TeeLiveBand" target="_blank" rel="noopener" aria-label="X/Twitter">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.5l-5.1-6.6L5.6 22H2.5l7.3-8.4L1.6 2H8.3l4.6 6 6-6Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/></svg>
         </a>
-        <a href="tel:+917676783827" aria-label="Call us" class="btn btn-primary" style="font-size:0.72rem">
+        <a href="tel:+917676783827" aria-label="Call us" class="btn btn-primary" style="padding:8px 16px;font-size:0.72rem">
           Book
         </a>
       </div>
@@ -1153,6 +1137,8 @@
         <p class="section-sub reveal">Stream our latest releases and crowd-favourite live performances.</p>
 
         <div class="video-grid">
+
+          <!-- Video 1 -->
           <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=sUYk-_U9AWw" target="_blank" rel="noopener" aria-label="Tu Raahi Hain">
             <div class="video-thumb">
               <img src="https://img.youtube.com/vi/sUYk-_U9AWw/hqdefault.jpg" alt="Tu Raahi Hain" loading="lazy" />
@@ -1161,13 +1147,14 @@
             </div>
             <div class="video-info">
               <h3>Tu Raahi Hain</h3>
-              <p>Latest Original • 2024</p>
+              <p>Latest Original • 2025</p>
             </div>
           </a>
 
-          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=UQ2bk5Pximc" target="_blank" rel="noopener" aria-label="Showreel">
+          <!-- Video 2 -->
+          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=UQ2bk5Pximc" target="_blank" rel="noopener" aria-label="Official Showreel">
             <div class="video-thumb">
-              <img src="https://img.youtube.com/vi/UQ2bk5Pximc/hqdefault.jpg" alt="Showreel" loading="lazy" />
+              <img src="https://img.youtube.com/vi/UQ2bk5Pximc/hqdefault.jpg" alt="Official Showreel" loading="lazy" />
               <div class="video-thumb-overlay"></div>
               <div class="play-btn"><svg fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
@@ -1177,20 +1164,97 @@
             </div>
           </a>
 
-          <a class="video-card tilt-card reveal" href="https://www.youtube.com/@theeinsteinexperience" target="_blank" rel="noopener" aria-label="YouTube Channel">
-            <div class="video-thumb" style="background: linear-gradient(135deg, #1a1a2e, #16213e); display:flex; align-items:center; justify-content:center; aspect-ratio:16/9;">
-              <div style="text-align:center; padding:20px;">
-                <svg width="56" height="56" viewBox="0 0 24 24" fill="#ff5500"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.5.5a3 3 0 0 0-2.1 2.1A31.6 31.6 0 0 0 2 12a31.6 31.6 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.7.5 7.5.5 7.5.5s5.8 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 22 12a31.6 31.6 0 0 0-.4-4.8ZM10 15.2V8.8L16 12l-6 3.2Z"/></svg>
-                <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.9rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,237,232,0.6);margin-top:10px;">All Videos</div>
-              </div>
+          <!-- Video 3 -->
+          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=00ULOZBM2kU" target="_blank" rel="noopener" aria-label="Live Performance">
+            <div class="video-thumb">
+              <img src="https://img.youtube.com/vi/00ULOZBM2kU/hqdefault.jpg" alt="Live Performance" loading="lazy" />
               <div class="video-thumb-overlay"></div>
               <div class="play-btn"><svg fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="video-info">
-              <h3>YouTube Channel</h3>
-              <p>Subscribe for more</p>
+              <h3>Live Performance</h3>
+              <p>The Einstein Experience</p>
             </div>
           </a>
+
+          <!-- Video 4 -->
+          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=3e_SIK2xHJU" target="_blank" rel="noopener" aria-label="Live Performance 2">
+            <div class="video-thumb">
+              <img src="https://img.youtube.com/vi/3e_SIK2xHJU/hqdefault.jpg" alt="Live Performance" loading="lazy" />
+              <div class="video-thumb-overlay"></div>
+              <div class="play-btn"><svg fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+              <h3>Live Performance</h3>
+              <p>The Einstein Experience</p>
+            </div>
+          </a>
+
+          <!-- Video 5 -->
+          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=oT8x0UlArBw" target="_blank" rel="noopener" aria-label="Live Performance 3">
+            <div class="video-thumb">
+              <img src="https://img.youtube.com/vi/oT8x0UlArBw/hqdefault.jpg" alt="Live Performance" loading="lazy" />
+              <div class="video-thumb-overlay"></div>
+              <div class="play-btn"><svg fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+              <h3>Live Performance</h3>
+              <p>The Einstein Experience</p>
+            </div>
+          </a>
+
+          <!-- Video 6 -->
+          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=Ryofg7Nnj7Q" target="_blank" rel="noopener" aria-label="Live Performance 4">
+            <div class="video-thumb">
+              <img src="https://img.youtube.com/vi/Ryofg7Nnj7Q/hqdefault.jpg" alt="Live Performance" loading="lazy" />
+              <div class="video-thumb-overlay"></div>
+              <div class="play-btn"><svg fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+              <h3>Live Performance</h3>
+              <p>The Einstein Experience</p>
+            </div>
+          </a>
+
+          <!-- Video 7 -->
+          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=GSgj3zRqK_A" target="_blank" rel="noopener" aria-label="Live Performance 5">
+            <div class="video-thumb">
+              <img src="https://img.youtube.com/vi/GSgj3zRqK_A/hqdefault.jpg" alt="Live Performance" loading="lazy" />
+              <div class="video-thumb-overlay"></div>
+              <div class="play-btn"><svg fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+              <h3>Live Performance</h3>
+              <p>The Einstein Experience</p>
+            </div>
+          </a>
+
+          <!-- Video 8 -->
+          <a class="video-card tilt-card reveal" href="https://www.youtube.com/watch?v=G7F4UkWjS4s" target="_blank" rel="noopener" aria-label="Live Performance 6">
+            <div class="video-thumb">
+              <img src="https://img.youtube.com/vi/G7F4UkWjS4s/hqdefault.jpg" alt="Live Performance" loading="lazy" />
+              <div class="video-thumb-overlay"></div>
+              <div class="play-btn"><svg fill="white" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-info">
+              <h3>Live Performance</h3>
+              <p>The Einstein Experience</p>
+            </div>
+          </a>
+
+          <!-- YouTube Channel Banner -->
+          <a class="video-card video-card--channel tilt-card reveal" href="https://www.youtube.com/@theeinsteinexperience" target="_blank" rel="noopener" aria-label="YouTube Channel">
+            <div class="video-thumb" style="background: linear-gradient(135deg, #1a1a2e, #16213e); display:flex; align-items:center; justify-content:center; height:90px; aspect-ratio:unset;">
+              <div style="display:flex;align-items:center;gap:16px;padding:20px;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="#ff5500"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.8 4.6 12 4.6 12 4.6s-5.8 0-7.5.5a3 3 0 0 0-2.1 2.1A31.6 31.6 0 0 0 2 12a31.6 31.6 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.7.5 7.5.5 7.5.5s5.8 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 22 12a31.6 31.6 0 0 0-.4-4.8ZM10 15.2V8.8L16 12l-6 3.2Z"/></svg>
+                <div>
+                  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.1em;color:#f0ede8;">View All Videos on YouTube</div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,237,232,0.5);margin-top:2px;">@theeinsteinexperience • Subscribe for more</div>
+                </div>
+              </div>
+            </div>
+          </a>
+
         </div>
       </div>
     </section>
@@ -1226,40 +1290,40 @@
 
         <div class="gallery-masonry">
           <div class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1600&q=80"
+            <img src="assets/Band.png"
                  alt="Gallery 1" loading="lazy"
                  onerror="this.src='assets/gallery1.svg'"
-                 data-lightbox="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1600&q=80" />
+                 data-lightbox="assets/Band.png" />
           </div>
           <div class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?auto=format&fit=crop&w=1600&q=80"
+            <img src="assets/Band1.png"
                  alt="Gallery 2" loading="lazy"
                  onerror="this.src='assets/gallery2.svg'"
-                 data-lightbox="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?auto=format&fit=crop&w=1600&q=80" />
+                 data-lightbox="assets/Band1.png" />
           </div>
           <div class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1655395700006-c27c6480169a?auto=format&fit=crop&w=1600&q=80"
-                 alt="Gallery 3" loading="lazy"
+            <img src="assets/Band2.png"
+                 alt="Gallery 3" loading="lazy"	
                  onerror="this.src='assets/gallery3.svg'"
-                 data-lightbox="https://images.unsplash.com/photo-1655395700006-c27c6480169a?auto=format&fit=crop&w=1600&q=80" />
+                 data-lightbox="assets/Band2.png" />
           </div>
           <div class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1700831213672-0961e3637344?auto=format&fit=crop&w=1600&q=80"
+            <img src="assets/band4.png"
                  alt="Gallery 4" loading="lazy"
                  onerror="this.src='assets/gallery4.svg'"
-                 data-lightbox="https://images.unsplash.com/photo-1700831213672-0961e3637344?auto=format&fit=crop&w=1600&q=80" />
+                 data-lightbox="assets/band4.png" />
           </div>
           <div class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1713885462557-12b5c41f22cd?auto=format&fit=crop&w=1600&q=80"
+               <img src="assets/Band5.png"
                  alt="Gallery 5" loading="lazy"
                  onerror="this.src='assets/gallery5.svg'"
-                 data-lightbox="https://images.unsplash.com/photo-1713885462557-12b5c41f22cd?auto=format&fit=crop&w=1600&q=80" />
+                 data-lightbox="assets/Band5.png" />
           </div>
           <div class="gallery-item reveal">
-            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1600&q=80"
+               <img src="assets/Band6.png"
                  alt="Gallery 6" loading="lazy"
                  onerror="this.src='assets/gallery6.svg'"
-                 data-lightbox="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1600&q=80" />
+                 data-lightbox="assets/Band6.png" />
           </div>
         </div>
       </div>
@@ -1273,16 +1337,9 @@
         <p class="section-sub reveal">Awards, milestones, and media mentions from across India.</p>
 
         <div class="achievements-grid">
+          
           <div class="achieve-card tilt-card reveal">
-            <img src="https://images.unsplash.com/photo-1563841930606-67e2bce48b78?auto=format&fit=crop&w=800&q=80"
-                 alt="Achievement 1" loading="lazy" onerror="this.src='assets/press1.svg'" />
-            <div class="achieve-card-body">
-              <h3>Best Live Act 2023</h3>
-              <p>Recognized at the Bengaluru Music Awards for outstanding live performance.</p>
-            </div>
-          </div>
-          <div class="achieve-card tilt-card reveal">
-            <img src="https://images.unsplash.com/photo-1700831213672-0961e3637344?auto=format&fit=crop&w=800&q=80"
+            <img src="assets/band4.png"
                  alt="Achievement 2" loading="lazy" onerror="this.src='assets/press2.svg'" />
             <div class="achieve-card-body">
               <h3>Corporate Excellence</h3>
@@ -1290,7 +1347,7 @@
             </div>
           </div>
           <div class="achieve-card tilt-card reveal">
-            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80"
+            <img src="assets/Band6.png"
                  alt="Achievement 3" loading="lazy" onerror="this.src='assets/press3.svg'" />
             <div class="achieve-card-body">
               <h3>Wedding Season Stars</h3>
@@ -1340,7 +1397,7 @@
 
           <div class="bio-visual reveal-right">
             <div class="bio-visual-inner">
-              <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80"
+              <img src="assets/Band1.png"
                    alt="The Einstein Experience performing"
                    onerror="this.src='assets/fallback.svg'" />
             </div>

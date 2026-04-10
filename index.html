@@ -101,7 +101,58 @@
       z-index: 1000;
     }
 
-    /* ─── SCROLLBAR ──────────────────────────────────────────── */
+    /* ─── 3D HERO DEPTH ──────────────────────────────────────── */
+    #home {
+      perspective: 1200px;
+    }
+    .hero-inner {
+      transform-style: preserve-3d;
+    }
+    .hero-logo {
+      transform: translateZ(40px);
+      filter: drop-shadow(0 0 30px rgba(255,85,0,0.7)) drop-shadow(0 0 60px rgba(255,85,0,0.3));
+    }
+    .hero-title {
+      transform: translateZ(20px);
+    }
+    .hero-tagline {
+      transform: translateZ(10px);
+    }
+    .hero-langs {
+      transform: translateZ(5px);
+    }
+    .hero-cta-group {
+      transform: translateZ(30px);
+    }
+
+    /* Depth vignette ring */
+    #home::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 3;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%,
+        transparent 40%,
+        rgba(6,6,8,0.45) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Animated color scanlines for cyberpunk depth */
+    .hero-scanlines-color {
+      position: absolute; inset: 0; z-index: 2;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255,85,0,0.015) 3px,
+        rgba(255,85,0,0.015) 4px
+      );
+      pointer-events: none;
+      animation: scanMove 8s linear infinite;
+    }
+    @keyframes scanMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100px; }
+    }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 2px; }
@@ -1035,7 +1086,8 @@
   <section id="home" aria-label="Hero">
     <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.svg">
       <!-- Primary: Pexels free concert crowd video (no auth required) -->
-      <source src="https://videos.pexels.com/video-files/854054/854054-hd_1920_1080_25fps.mp4" type="video/mp4" />
+      <!-- <source src="https://videos.pexels.com/video-files/854054/854054-hd_1920_1080_25fps.mp4" type="video/mp4" /> -->
+	  <source src="assets/videoplayback.mp4" type="video/mp4" />
       <!-- Fallback: local asset -->
       <source src="assets/hero-video.mp4" type="video/mp4" />
     </video>
@@ -1043,6 +1095,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="scanlines" aria-hidden="true"></div>
+    <div class="hero-scanlines-color" aria-hidden="true"></div>
 
     <div class="hero-inner">
       <img class="hero-logo" src="assets/logo.png" alt="The Einstein Experience logo" />
@@ -1708,37 +1761,171 @@
       setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; }, 3000);
     };
 
-    // ─ Particle background in hero
-    const canvas = document.createElement('canvas');
-    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0.35';
-    document.getElementById('home').appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = window.innerWidth;
-    let H = canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+    // ─ 3D Hero tilt on mouse move
+    const heroSection = document.getElementById('home');
+    const heroInner = heroSection.querySelector('.hero-inner');
+    heroSection.addEventListener('mousemove', e => {
+      const rx = ((e.clientY / window.innerHeight) - 0.5) * -12;
+      const ry = ((e.clientX / window.innerWidth) - 0.5) * 14;
+      heroInner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+    heroSection.addEventListener('mouseleave', () => {
+      heroInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      heroInner.style.transition = 'transform 0.8s ease';
+    });
+    heroSection.addEventListener('mouseenter', () => {
+      heroInner.style.transition = 'transform 0.1s ease';
+    });
+    (function() {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+      script.onload = init3D;
+      document.head.appendChild(script);
 
-    const particles = Array.from({length: 60}, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      r: Math.random() * 1.5 + 0.5,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: -Math.random() * 0.5 - 0.1,
-      alpha: Math.random() * 0.5 + 0.2,
-    }));
+      function init3D() {
+        const hero = document.getElementById('home');
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        renderer.domElement.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;';
+        hero.appendChild(renderer.domElement);
 
-    function drawParticles() {
-      ctx.clearRect(0, 0, W, H);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,85,0,${p.alpha})`;
-        ctx.fill();
-        p.x += p.vx; p.y += p.vy;
-        if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-      });
-      requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
+        camera.position.set(0, 0, 30);
+
+        // Mouse parallax
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', e => {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        // Musical symbol paths (as 2D shapes extruded to 3D)
+        const symbols = ['♩','♪','♫','♬','𝄞','𝄢','♭','♮','♯','𝅘𝅥𝅮'];
+
+        // Create canvas textures for each symbol
+        function makeSymbolTexture(sym) {
+          const c = document.createElement('canvas');
+          c.width = 128; c.height = 128;
+          const cx = c.getContext('2d');
+          cx.clearRect(0,0,128,128);
+          cx.font = 'bold 80px serif';
+          cx.textAlign = 'center';
+          cx.textBaseline = 'middle';
+          // Glow
+          cx.shadowColor = '#ff5500';
+          cx.shadowBlur = 20;
+          cx.fillStyle = '#ffffff';
+          cx.fillText(sym, 64, 68);
+          return new THREE.CanvasTexture(c);
+        }
+
+        const textures = symbols.map(makeSymbolTexture);
+
+        // Spawn floating symbol sprites
+        const sprites = [];
+        const COUNT = 55;
+
+        for (let i = 0; i < COUNT; i++) {
+          const tex = textures[i % textures.length];
+          const mat = new THREE.SpriteMaterial({
+            map: tex,
+            transparent: true,
+            opacity: Math.random() * 0.55 + 0.15,
+            depthWrite: false,
+          });
+          const sprite = new THREE.Sprite(mat);
+          const scale = Math.random() * 3.5 + 0.8;
+          sprite.scale.set(scale, scale, 1);
+          sprite.position.set(
+            (Math.random() - 0.5) * 80,
+            (Math.random() - 0.5) * 50,
+            (Math.random() - 0.5) * 60
+          );
+          sprite.userData = {
+            vx: (Math.random() - 0.5) * 0.025,
+            vy: Math.random() * 0.03 + 0.008,
+            vz: (Math.random() - 0.5) * 0.012,
+            rotSpeed: (Math.random() - 0.5) * 0.02,
+            pulseSpeed: Math.random() * 0.02 + 0.01,
+            pulseOffset: Math.random() * Math.PI * 2,
+            baseOpacity: mat.opacity,
+          };
+          scene.add(sprite);
+          sprites.push(sprite);
+        }
+
+        // Add glowing orbs for depth
+        const orbGeom = new THREE.SphereGeometry(1, 16, 16);
+        const orbColors = [0xff5500, 0xff8c00, 0xffd700, 0xff3300];
+        for (let i = 0; i < 12; i++) {
+          const mat = new THREE.MeshBasicMaterial({
+            color: orbColors[i % orbColors.length],
+            transparent: true,
+            opacity: Math.random() * 0.12 + 0.04,
+          });
+          const orb = new THREE.Mesh(orbGeom, mat);
+          const s = Math.random() * 4 + 1;
+          orb.scale.set(s, s, s);
+          orb.position.set(
+            (Math.random() - 0.5) * 90,
+            (Math.random() - 0.5) * 60,
+            (Math.random() - 0.5) * 40 - 10
+          );
+          orb.userData = {
+            vy: Math.random() * 0.02 + 0.005,
+            pulseSpeed: Math.random() * 0.015 + 0.005,
+            pulseOffset: Math.random() * Math.PI * 2,
+            baseOpacity: mat.opacity,
+          };
+          scene.add(orb);
+          sprites.push(orb);
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        let t = 0;
+        function animate() {
+          requestAnimationFrame(animate);
+          t += 0.016;
+
+          // Smooth camera parallax
+          camera.position.x += (mouseX * 4 - camera.position.x) * 0.04;
+          camera.position.y += (-mouseY * 2.5 - camera.position.y) * 0.04;
+          camera.lookAt(0, 0, 0);
+
+          sprites.forEach(obj => {
+            const d = obj.userData;
+            obj.position.y += d.vy || 0;
+            obj.position.x += d.vx || 0;
+            obj.position.z += d.vz || 0;
+
+            // Pulse opacity
+            if (obj.material) {
+              const pulse = Math.sin(t * (d.pulseSpeed || 0.01) * 60 + d.pulseOffset) * 0.15;
+              obj.material.opacity = Math.max(0.05, (d.baseOpacity || 0.2) + pulse);
+            }
+
+            // Wrap around bounds
+            if (obj.position.y > 30) obj.position.y = -30;
+            if (obj.position.x > 45) obj.position.x = -45;
+            if (obj.position.x < -45) obj.position.x = 45;
+            if (obj.position.z > 35) obj.position.z = -35;
+            if (obj.position.z < -35) obj.position.z = 35;
+          });
+
+          renderer.render(scene, camera);
+        }
+        animate();
+      }
+    })();
 
   })();
   </script>

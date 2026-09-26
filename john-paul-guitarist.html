@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>John Paul — Guitarist, Composer & Multi-Instrumentalist | Kolkata, India</title>
+  <meta name="description" content="John Paul is an independent guitarist, composer, and multi-instrumentalist from Kolkata, India. Known for his fusion style blending funk, jazz, rock, and Indian classical music. Session artist for Arijit Singh, Sonu Nigam, Amit Trivedi & Raghu Dixit.">
+  <meta name="keywords" content="John Paul guitarist, Kolkata guitarist, Indian fusion guitarist, session musician India, Kalpana album, John Paul Live, Shankar Mahadevan collaboration, Arijit Singh session guitarist">
+  <meta name="author" content="John Paul">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="John Paul — Guitarist & Composer">
+  <meta property="og:description" content="Fusion guitarist from Kolkata. Session artist for Arijit Singh, Sonu Nigam & more. Debut album Kalpana out now.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "John Paul",
+    "description": "Independent guitarist, composer, and multi-instrumentalist from Kolkata, India. Known for fusion style blending funk, jazz, rock, and Indian classical music.",
+    "genre": ["Fusion", "Jazz", "Rock", "Indian Classical", "Funk"],
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Kolkata, India"
+    },
+    "member": {
+      "@type": "Person",
+      "name": "John Paul",
+      "jobTitle": "Guitarist, Composer, Multi-Instrumentalist",
+      "birthPlace": "Kolkata, India",
+      "instrument": ["Guitar", "Drums", "Keyboard"]
+    },
+    "album": {
+      "@type": "MusicAlbum",
+      "name": "Kalpana",
+      "description": "Debut solo album dedicated to his late mother, featuring collaborations with Shankar Mahadevan and national and international artists."
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #050508;
+      --deep: #0a0a12;
+      --void: #06060f;
+      --electric: #ff3c00;
+      --plasma: #ff6a1a;
+      --cold: #00d4ff;
+      --violet: #8b00ff;
+      --gold: #ffd700;
+      --string: rgba(255,60,0,0.6);
+      --white: #f0eefc;
+      --muted: rgba(240,238,252,0.45);
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--void);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    #cursor {
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--electric);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, background 0.2s;
+      box-shadow: 0 0 20px var(--electric), 0 0 40px rgba(255,60,0,0.4);
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(255,60,0,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease-out, width 0.2s, height 0.2s;
+    }
+
+    /* Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: normal;
+    }
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(5,5,8,0.9) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-logo span { color: var(--electric); }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--electric); }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      perspective: 1000px;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding-top: 6rem;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--electric);
+      margin-bottom: 1.5rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(255,60,0,0.35);
+      border-radius: 2px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 15vw, 14rem);
+      line-height: 0.88;
+      color: var(--white);
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .hero-title .line-1 {
+      display: block;
+      transform: translateZ(0px);
+      transition: transform 0.4s;
+      text-shadow: 0 0 80px rgba(255,60,0,0.15);
+    }
+    .hero-title .line-2 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--electric);
+      transform: translateZ(-20px) translateX(2rem);
+      transition: transform 0.4s;
+      filter: drop-shadow(0 0 20px rgba(255,60,0,0.5));
+    }
+    .hero-title:hover .line-1 { transform: translateZ(30px) translateX(-0.5rem); }
+    .hero-title:hover .line-2 { transform: translateZ(-40px) translateX(3rem); }
+
+    .hero-descriptor {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+    .hero-role {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 420px;
+      font-weight: 300;
+    }
+    .hero-role strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-left: 3rem;
+      border-left: 1px solid rgba(255,60,0,0.2);
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      color: var(--electric);
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(255,60,0,0.5);
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--electric);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { width: 40px; opacity: 0.5; }
+      50% { width: 70px; opacity: 1; }
+    }
+
+    /* SECTION BASE */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* STRING DIVIDER */
+    .string-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--electric) 30%, var(--plasma) 50%, var(--electric) 70%, transparent 100%);
+      opacity: 0.3;
+      position: relative;
+      overflow: visible;
+    }
+    .string-divider::after {
+      content: '';
+      position: absolute;
+      top: -3px; left: 50%;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--electric);
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px var(--electric);
+    }
+
+    /* ABOUT SECTION */
+    #about {
+      padding: 8rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--electric);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--electric);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      color: var(--white);
+      grid-column: 1;
+    }
+    .about-headline em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,60,0,0.7);
+    }
+
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .about-text p + p { margin-top: 1.2em; }
+    .about-text strong { color: var(--white); font-weight: 500; }
+
+    /* INSTRUMENTS */
+    .instruments-row {
+      margin-top: 5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .instrument-pill {
+      padding: 0.6rem 1.4rem;
+      border: 1px solid rgba(255,60,0,0.25);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      position: relative;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      background: rgba(255,60,0,0.04);
+      transition: background 0.2s, color 0.2s;
+    }
+    .instrument-pill:hover {
+      background: rgba(255,60,0,0.12);
+      color: var(--electric);
+    }
+
+    /* COLLABORATORS */
+    #collaborators {
+      padding: 6rem 3rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(255,60,0,0.03) 50%, transparent 100%);
+    }
+    .collab-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .collab-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      color: var(--white);
+      margin-bottom: 3rem;
+    }
+
+    .collab-marquee-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    .collab-marquee-wrap::before,
+    .collab-marquee-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .collab-marquee-wrap::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--void) 0%, transparent 100%);
+    }
+    .collab-marquee-wrap::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--void) 0%, transparent 100%);
+    }
+    .collab-marquee {
+      display: flex;
+      gap: 0;
+      animation: marquee 18s linear infinite;
+      width: max-content;
+    }
+    .collab-marquee:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .collab-name {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(240,238,252,0.25);
+      padding: 0 2.5rem;
+      white-space: nowrap;
+      transition: color 0.2s, -webkit-text-stroke 0.2s;
+      position: relative;
+      cursor: default;
+    }
+    .collab-name:hover {
+      color: var(--electric);
+      -webkit-text-stroke: 0px;
+      text-shadow: 0 0 30px rgba(255,60,0,0.6);
+    }
+    .collab-sep {
+      color: var(--electric);
+      opacity: 0.4;
+      align-self: center;
+      font-size: 1rem;
+    }
+
+    /* ALBUM SECTION */
+    #album {
+      padding: 8rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .album-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .album-art {
+      aspect-ratio: 1;
+      position: relative;
+      perspective: 600px;
+    }
+    .album-face {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--deep) 0%, #12001f 40%, #1a000a 100%);
+      border: 1px solid rgba(255,60,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transform-style: preserve-3d;
+      transform: rotateY(-8deg) rotateX(4deg);
+      transition: transform 0.4s ease;
+      box-shadow:
+        20px 20px 60px rgba(0,0,0,0.8),
+        inset 0 0 80px rgba(139,0,255,0.08),
+        0 0 40px rgba(255,60,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .album-face::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 4px,
+          rgba(255,60,0,0.015) 4px,
+          rgba(255,60,0,0.015) 5px
+        );
+    }
+    .album-face::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(139,0,255,0.05) 60deg, transparent 120deg);
+      animation: albumGlow 8s linear infinite;
+    }
+    @keyframes albumGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .album-art:hover .album-face {
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+    .album-title-art {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--white);
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 60px rgba(139,0,255,0.8), 0 0 120px rgba(255,60,0,0.4);
+      letter-spacing: 0.1em;
+    }
+    .album-sub-art {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: rgba(240,238,252,0.4);
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      margin-top: 0.5rem;
+    }
+    .album-year {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: rgba(255,60,0,0.5);
+      z-index: 1;
+    }
+
+    .album-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .album-info h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--white);
+      line-height: 0.95;
+    }
+    .album-info p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .album-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--violet);
+      border: 1px solid rgba(139,0,255,0.35);
+      padding: 0.4rem 1rem;
+      width: fit-content;
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
+      box-shadow: 0 0 10px var(--violet);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* STYLE SECTION */
+    #style {
+      padding: 8rem 3rem;
+      overflow: hidden;
+    }
+    .style-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 3rem;
+      background: rgba(255,60,0,0.1);
+    }
+    .style-card {
+      background: var(--void);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .style-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,60,0,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .style-card:hover { background: rgba(255,60,0,0.05); }
+    .style-card:hover::before { opacity: 1; }
+    .style-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .style-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    .style-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .style-bar {
+      margin-top: 1.2rem;
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .style-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--electric), var(--violet));
+      transition: width 1s ease;
+    }
+
+    /* TIMELINE */
+    #journey {
+      padding: 8rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .timeline {
+      position: relative;
+      margin-top: 3rem;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--electric) 0%, var(--violet) 50%, transparent 100%);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 3rem 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 0.4rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--electric);
+      box-shadow: 0 0 15px var(--electric);
+    }
+    .timeline-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: var(--electric);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-event {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .timeline-detail {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 8rem 3rem;
+      text-align: center;
+      position: relative;
+    }
+    .contact-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,60,0,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .contact-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.9;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .contact-headline span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255,60,0,0.5);
+    }
+    .contact-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .contact-cta {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--electric);
+      padding: 1rem 3rem;
+      text-decoration: none;
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+      transition: background 0.2s, box-shadow 0.2s;
+      font-weight: 700;
+    }
+    .contact-cta:hover {
+      background: var(--plasma);
+      box-shadow: 0 0 40px rgba(255,60,0,0.5);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,60,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: rgba(240,238,252,0.3);
+      letter-spacing: 0.1em;
+    }
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(240,238,252,0.2);
+      letter-spacing: 0.1em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.7rem;
+      color: rgba(240,238,252,0.3);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--electric); }
+
+    /* 3D FLOATING STRINGS */
+    .hero-strings {
+      position: absolute;
+      right: 0; top: 0;
+      width: 50%;
+      height: 100%;
+      pointer-events: none;
+      perspective: 800px;
+      transform-style: preserve-3d;
+    }
+    .string {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 1px;
+      transform-style: preserve-3d;
+    }
+    .string-line {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(255,60,0,0.08) 20%,
+        rgba(255,60,0,0.35) 50%,
+        rgba(255,60,0,0.08) 80%,
+        transparent 100%
+      );
+    }
+
+    /* GLITCH TEXT */
+    .glitch {
+      position: relative;
+      display: inline-block;
+    }
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+    .glitch::before {
+      color: var(--cold);
+      clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+      transform: translateX(-2px);
+      animation: glitch1 4s infinite step-start;
+    }
+    .glitch::after {
+      color: var(--electric);
+      clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+      transform: translateX(2px);
+      animation: glitch2 4s infinite step-start;
+    }
+    @keyframes glitch1 {
+      0%, 90%, 100% { opacity: 0; transform: translateX(0); }
+      91% { opacity: 0.8; transform: translateX(-4px); }
+      92% { opacity: 0; }
+      93% { opacity: 0.6; transform: translateX(2px); }
+      94% { opacity: 0; }
+    }
+    @keyframes glitch2 {
+      0%, 87%, 100% { opacity: 0; transform: translateX(0); }
+      88% { opacity: 0.7; transform: translateX(3px); }
+      89% { opacity: 0; }
+      90% { opacity: 0.5; transform: translateX(-2px); }
+      91% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero, #about, #album, #journey, #contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .about-grid, .album-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .style-grid { grid-template-columns: 1fr 1fr; }
+      .hero-descriptor { flex-direction: column; gap: 2rem; }
+      .hero-stats { padding-left: 0; border-left: none; padding-top: 1rem; border-top: 1px solid rgba(255,60,0,0.2); flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .collab-marquee { animation: none; }
+      .glitch::before, .glitch::after { display: none; }
+      .scroll-line { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="bg-canvas"></canvas>
+
+  <nav aria-label="Main navigation">
+    <a href="#" class="nav-logo">JP<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#collaborators">Sessions</a></li>
+      <li><a href="#album">Kalpana</a></li>
+      <li><a href="#style">Sound</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <span class="hero-tag">Kolkata, India · Est. 2010</span>
+      <h1 class="hero-title" id="hero-title">
+        <span class="line-1 glitch" data-text="JOHN">JOHN</span>
+        <span class="line-2">PAUL</span>
+      </h1>
+      <div class="hero-descriptor">
+        <p class="hero-role">
+          <strong>Guitarist · Composer · Multi-Instrumentalist</strong><br>
+          Fusion architect weaving funk, jazz, rock, and Indian classical into something entirely his own. From Kolkata street music to national stages.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Years performing</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">4+</span>
+            <span class="stat-label">Major collaborations</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">01</span>
+            <span class="stat-label">Debut album</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 3D Guitar Strings Decoration -->
+    <div class="hero-strings" aria-hidden="true">
+      <div class="string" style="left:15%; animation: strVibrate1 3.2s ease-in-out infinite;"><div class="string-line"></div></div>
+      <div class="string" style="left:30%; animation: strVibrate2 2.8s ease-in-out infinite 0.5s;"><div class="string-line" style="background: linear-gradient(180deg, transparent 0%, rgba(0,212,255,0.05) 20%, rgba(0,212,255,0.2) 50%, rgba(0,212,255,0.05) 80%, transparent 100%);"></div></div>
+      <div class="string" style="left:48%; animation: strVibrate1 3.6s ease-in-out infinite 1s;"><div class="string-line"></div></div>
+      <div class="string" style="left:64%; animation: strVibrate2 2.5s ease-in-out infinite 0.2s;"><div class="string-line" style="background: linear-gradient(180deg, transparent 0%, rgba(139,0,255,0.06) 20%, rgba(139,0,255,0.25) 50%, rgba(139,0,255,0.06) 80%, transparent 100%);"></div></div>
+      <div class="string" style="left:79%; animation: strVibrate1 3s ease-in-out infinite 0.7s;"><div class="string-line"></div></div>
+      <div class="string" style="left:93%; animation: strVibrate2 4s ease-in-out infinite 1.3s;"><div class="string-line"></div></div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true">
+      <span class="scroll-line"></span>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <style>
+    @keyframes strVibrate1 {
+      0%, 100% { transform: translateX(0) skewX(0deg); }
+      25% { transform: translateX(3px) skewX(1deg); }
+      75% { transform: translateX(-3px) skewX(-1deg); }
+    }
+    @keyframes strVibrate2 {
+      0%, 100% { transform: translateX(0) skewX(0deg); }
+      33% { transform: translateX(-2px) skewX(-0.5deg); }
+      66% { transform: translateX(2px) skewX(0.5deg); }
+    }
+  </style>
+
+  <div class="string-divider" aria-hidden="true"></div>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="about-grid">
+      <div>
+        <p class="section-label">About</p>
+        <h2 class="about-headline" id="about-heading">
+          The Art<br>Of<br><em>Fusion</em>
+        </h2>
+        <div class="instruments-row" role="list" aria-label="Instruments played">
+          <span class="instrument-pill" role="listitem">Electric Guitar</span>
+          <span class="instrument-pill" role="listitem">Acoustic Guitar</span>
+          <span class="instrument-pill" role="listitem">Drum Kit</span>
+          <span class="instrument-pill" role="listitem">Keyboard</span>
+          <span class="instrument-pill" role="listitem">Bass</span>
+          <span class="instrument-pill" role="listitem">Strings</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>
+          Born and rooted in <strong>Kolkata</strong>, John Paul began his professional journey around 2010 — cutting his teeth with local bands including the Bengali outfit <strong>Lakhichara</strong>, where he developed the rhythmic sensitivity that would define his later work.
+        </p>
+        <p>
+          His project <strong>John Paul Live</strong> is where all the threads meet: funk grooves, jazz harmonics, rock distortion, and the meditative depth of Indian classical rāgas — woven together in real time, on stage.
+        </p>
+        <p>
+          As a <strong>session musician</strong>, he has earned the trust of India's biggest voices — recording and performing alongside Arijit Singh, Sonu Nigam, Amit Trivedi, and Raghu Dixit. His guitar is distinctive enough to be sought, and disciplined enough to serve the song.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="string-divider" aria-hidden="true"></div>
+
+  <!-- COLLABORATORS -->
+  <section id="collaborators" aria-labelledby="collab-heading">
+    <div class="collab-inner">
+      <p class="section-label">Session Work</p>
+      <h2 class="collab-headline" id="collab-heading">Played with the best.</h2>
+    </div>
+    <div class="collab-marquee-wrap" aria-label="Collaborating artists">
+      <div class="collab-marquee">
+        <span class="collab-name">Arijit Singh</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Sonu Nigam</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Amit Trivedi</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Raghu Dixit</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Shankar Mahadevan</span><span class="collab-sep">◆</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="collab-name">Arijit Singh</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Sonu Nigam</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Amit Trivedi</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Raghu Dixit</span><span class="collab-sep">◆</span>
+        <span class="collab-name">Shankar Mahadevan</span><span class="collab-sep">◆</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="string-divider" aria-hidden="true"></div>
+
+  <!-- ALBUM -->
+  <section id="album" aria-labelledby="album-heading">
+    <p class="section-label">Debut Album</p>
+    <div class="album-grid">
+      <div class="album-art" role="img" aria-label="Kalpana album art">
+        <div class="album-face">
+          <span class="album-title-art">KALPANA</span>
+          <span class="album-sub-art">कल्पना · John Paul</span>
+          <span class="album-year">2024</span>
+        </div>
+      </div>
+      <div class="album-info">
+        <div class="album-badge">
+          <span class="badge-dot"></span>
+          Debut Solo Album
+        </div>
+        <h2 id="album-heading">
+          Kalpana<br><span style="font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:300; color:var(--muted); letter-spacing:0;">कल्पना · Imagination</span>
+        </h2>
+        <p>
+          A deeply personal record dedicated to John Paul's late mother, <em>Kalpana</em> is equal parts grief and celebration — a sonic portrait built from imagination, memory, and music.
+        </p>
+        <p>
+          Featuring collaborations with the legendary <strong>Shankar Mahadevan</strong> alongside a constellation of national and international artists, the album moves through genres as fluidly as John Paul himself: jazz interludes dissolving into Indian classical passages, rock crescendos settling into delicate acoustic reveries.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="string-divider" aria-hidden="true"></div>
+
+  <!-- STYLE / SOUND -->
+  <section id="style" aria-labelledby="style-heading">
+    <div class="style-inner">
+      <p class="section-label">Sound</p>
+      <h2 class="about-headline" id="style-heading" style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:0;">
+        Where Genres<br>Break Down
+      </h2>
+      <div class="style-grid" role="list">
+        <article class="style-card" role="listitem">
+          <span class="style-icon" aria-hidden="true">⚡</span>
+          <h3 class="style-name">Funk</h3>
+          <p class="style-desc">Tight rhythmic phrasing, ghost notes, and the kind of groove that moves people before they know it's happening.</p>
+          <div class="style-bar"><div class="style-bar-fill" style="width:92%" aria-hidden="true"></div></div>
+        </article>
+        <article class="style-card" role="listitem">
+          <span class="style-icon" aria-hidden="true">🎷</span>
+          <h3 class="style-name">Jazz</h3>
+          <p class="style-desc">Extended chords, chromatic lines, and an improvisational vocabulary rooted in listening as much as playing.</p>
+          <div class="style-bar"><div class="style-bar-fill" style="width:85%" aria-hidden="true"></div></div>
+        </article>
+        <article class="style-card" role="listitem">
+          <span class="style-icon" aria-hidden="true">🔊</span>
+          <h3 class="style-name">Rock</h3>
+          <p class="style-desc">Distorted edges, dynamic range, and a command of space — knowing when to explode and when to hold back.</p>
+          <div class="style-bar"><div class="style-bar-fill" style="width:88%" aria-hidden="true"></div></div>
+        </article>
+        <article class="style-card" role="listitem">
+          <span class="style-icon" aria-hidden="true">🪘</span>
+          <h3 class="style-name">Indian Classical</h3>
+          <p class="style-desc">Rāga sensibility, microtonal inflections, and the melodic logic of a tradition centuries in the making.</p>
+          <div class="style-bar"><div class="style-bar-fill" style="width:80%" aria-hidden="true"></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="string-divider" aria-hidden="true"></div>
+
+  <!-- JOURNEY -->
+  <section id="journey" aria-labelledby="journey-heading">
+    <p class="section-label">Journey</p>
+    <h2 class="about-headline" id="journey-heading" style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:0;">
+      From Kolkata<br>to Every Stage
+    </h2>
+    <div class="timeline" role="list">
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-year">2010</div>
+        <div class="timeline-event">Professional debut</div>
+        <p class="timeline-detail">Began playing for local bands in Kolkata, including the Bengali outfit Lakhichara. Found his voice in the city's vibrant underground scene.</p>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-year">2012–2018</div>
+        <div class="timeline-event">Session circuit</div>
+        <p class="timeline-detail">Broke through as a sought-after session guitarist, contributing to recordings and live performances with Arijit Singh, Sonu Nigam, Amit Trivedi, and Raghu Dixit.</p>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-year">Ongoing</div>
+        <div class="timeline-event">John Paul Live</div>
+        <p class="timeline-detail">Leads his own fusion project — a dynamic live band blurring genre lines across jazz, funk, rock, and Indian classical.</p>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-event">Kalpana released</div>
+        <p class="timeline-detail">Debut solo album drops, featuring Shankar Mahadevan and collaborators from across India and beyond. A dedication to his late mother — and a statement of artistic maturity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <div class="contact-bg" aria-hidden="true"></div>
+    <div class="contact-inner">
+      <h2 class="contact-headline" id="contact-heading">
+        Let's Make<br><span>Music</span>
+      </h2>
+      <p class="contact-sub">
+        Session work, collaborations, live bookings, or just a conversation about music. John Paul is always listening.
+      </p>
+      <a href="mailto:booking@johnpaulguitar.com" class="contact-cta">Get in touch</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">John Paul</span>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#album">Kalpana</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <span class="footer-copy">© 2025 John Paul. Kolkata, India.</span>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+    document.querySelectorAll('a, button, .collab-name, .style-card, .album-face').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        cursorRing.style.width = '60px';
+        cursorRing.style.height = '60px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        cursorRing.style.width = '40px';
+        cursorRing.style.height = '40px';
+      });
+    });
+
+    // Canvas: particle field + string wave effect
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], mouseX = 0, mouseY = 0;
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.size = Math.random() * 1.5 + 0.3;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.life = Math.random();
+        this.maxLife = 0.4 + Math.random() * 0.6;
+        this.hue = Math.random() < 0.6 ? 'rgba(255,60,0,' : (Math.random() < 0.5 ? 'rgba(0,212,255,' : 'rgba(139,0,255,');
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life += 0.003;
+        // Mouse repulsion
+        const dx = this.x - mouseX, dy = this.y - mouseY;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120) {
+          this.vx += dx / d * 0.3;
+          this.vy += dy / d * 0.3;
+        }
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+        if (this.life > this.maxLife || this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+      }
+      draw() {
+        const alpha = Math.sin(this.life / this.maxLife * Math.PI) * 0.7;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.hue + alpha + ')';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 180; i++) particles.push(new Particle());
+
+    // String waves
+    const strings = [
+      { y: 0.2, color: 'rgba(255,60,0,', amp: 18, freq: 0.008, speed: 0.6 },
+      { y: 0.4, color: 'rgba(0,212,255,', amp: 12, freq: 0.012, speed: -0.5 },
+      { y: 0.6, color: 'rgba(139,0,255,', amp: 22, freq: 0.006, speed: 0.4 },
+      { y: 0.75, color: 'rgba(255,60,0,', amp: 10, freq: 0.015, speed: -0.7 },
+      { y: 0.9, color: 'rgba(0,212,255,', amp: 15, freq: 0.009, speed: 0.55 },
+    ];
+    let t = 0;
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Draw string waves
+      strings.forEach(s => {
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 2) {
+          const wave = Math.sin(x * s.freq + t * s.speed) * s.amp
+                     + Math.sin(x * s.freq * 1.7 + t * s.speed * 1.3) * s.amp * 0.4;
+          const y = s.y * H + wave;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        const grad = ctx.createLinearGradient(0, 0, W, 0);
+        grad.addColorStop(0, s.color + '0)');
+        grad.addColorStop(0.2, s.color + '0.15)');
+        grad.addColorStop(0.5, s.color + '0.3)');
+        grad.addColorStop(0.8, s.color + '0.15)');
+        grad.addColorStop(1, s.color + '0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      });
+
+      // Connect nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < 80) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(255,60,0,${0.06 * (1 - d/80)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      t += 0.015;
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Intersection Observer for style bars
+    const bars = document.querySelectorAll('.style-bar-fill');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.getAttribute('style').match(/width:([^%]+%)/)?.[1] || '80%';
+        } else {
+          e.target.style.width = '0%';
+        }
+      });
+    }, { threshold: 0.3 });
+    bars.forEach(b => {
+      const w = b.style.width;
+      b.style.width = '0%';
+      b.setAttribute('style', `width:${w}`);
+      b.style.width = '0%';
+      observer.observe(b);
+    });
+
+    // 3D tilt on hero title
+    const heroTitle = document.querySelector('.hero-title');
+    document.getElementById('hero').addEventListener('mousemove', e => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const rx2 = (e.clientY - cy) / rect.height * -12;
+      const ry2 = (e.clientX - cx) / rect.width * 12;
+      heroTitle.style.transform = `perspective(600px) rotateX(${rx2}deg) rotateY(${ry2}deg)`;
+    });
+    document.getElementById('hero').addEventListener('mouseleave', () => {
+      heroTitle.style.transform = 'perspective(600px) rotateX(0) rotateY(0)';
+    });
+  </script>
+</body>
+</html>

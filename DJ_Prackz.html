@@ -63,6 +63,42 @@ h1 .dj { font-size: .4em; letter-spacing: .3em; color: #E6FEFF; line-height: 1; 
 .meter canvas { display: block; width: 100%; height: 120px; }
 .meter-cap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); padding-block: 10px 0; }
 
+/* stage: crowd behind, light beams over it, DJ booth in front */
+.stage { position: relative; margin-top: 36px; height: clamp(300px, 54vw, 580px); overflow: hidden; isolation: isolate; border: 1px solid var(--line);
+  background: radial-gradient(70% 90% at 50% 100%, rgba(255,43,214,.38), transparent 70%), radial-gradient(60% 70% at 12% 0%, rgba(25,243,255,.20), transparent 70%), linear-gradient(#0b0720, #05030d); }
+.stage .crowd { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.stage .booth { position: absolute; left: 50%; bottom: -2px; width: min(96%, 900px); height: auto; transform: translateX(-50%); z-index: 3; filter: drop-shadow(0 -12px 30px rgba(25,243,255,.18)); }
+.beams { position: absolute; inset: 0; z-index: 2; pointer-events: none; mix-blend-mode: screen; }
+.beams i { position: absolute; top: -8%; width: 22%; height: 115%; transform-origin: 50% 0; background: linear-gradient(to bottom, var(--c), transparent 78%); clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%); opacity: .55; filter: blur(5px); animation: sweep var(--t) ease-in-out infinite alternate; }
+.beams i:nth-child(1) { left: 0%;  --c: rgba(255,43,214,.75); --t: 5.5s; --a: -16deg; --b: 16deg; }
+.beams i:nth-child(2) { left: 20%; --c: rgba(25,243,255,.7);  --t: 7s;   --a: 18deg;  --b: -12deg; }
+.beams i:nth-child(3) { left: 39%; --c: rgba(198,255,46,.5);  --t: 6.2s; --a: -10deg; --b: 12deg; }
+.beams i:nth-child(4) { left: 58%; --c: rgba(255,43,214,.7);  --t: 8s;   --a: 14deg;  --b: -18deg; }
+.beams i:nth-child(5) { left: 78%; --c: rgba(25,243,255,.75); --t: 6.8s; --a: -14deg; --b: 10deg; }
+@keyframes sweep { from { transform: rotate(var(--a)); } to { transform: rotate(var(--b)); } }
+/* crowd and booth motion, timed to 128 BPM (one beat is 0.469s) */
+.bob { animation: bob .9375s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-9px); } }
+.armsw { animation: armL 1.875s ease-in-out infinite alternate; }
+.armsw.r { animation-name: armR; }
+@keyframes armL { from { transform: rotate(-16deg); } to { transform: rotate(14deg); } }
+@keyframes armR { from { transform: rotate(16deg); } to { transform: rotate(-14deg); } }
+.djbob { animation: djbob .9375s ease-in-out infinite alternate; }
+@keyframes djbob { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+.djarm.l { animation: djL .9375s ease-in-out infinite alternate; }
+.djarm.r { animation: djR .9375s ease-in-out infinite alternate; }
+@keyframes djL { from { transform: rotate(-4deg); } to { transform: rotate(3deg); } }
+@keyframes djR { from { transform: rotate(4deg); } to { transform: rotate(-3deg); } }
+.spin { animation: spin 1.8s linear infinite; } /* 33 rpm */
+.cap { animation: capmove var(--d) ease-in-out infinite alternate; }
+@keyframes capmove { to { transform: translateY(var(--m)); } }
+.xcap { animation: xmove 3.6s ease-in-out infinite alternate; }
+@keyframes xmove { from { transform: translateX(-22px); } to { transform: translateX(22px); } }
+@keyframes ledlow { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+@keyframes ledmid { 0%, 100% { opacity: .2; } 40%, 60% { opacity: 1; } }
+@keyframes ledhi { 0%, 65%, 100% { opacity: .12; } 75%, 88% { opacity: 1; } }
+@keyframes padpulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+
 /* sections */
 section { padding-block: 84px 0; }
 .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; border-top: 2px solid var(--blue); padding-top: 14px; }
@@ -99,7 +135,7 @@ footer a { color: var(--blue); }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 .disc .rec { transform-origin: 50% 50%; animation: spin 9s linear infinite; }
-@media (prefers-reduced-motion: reduce) { .disc .rec, h1 span:last-child { animation: none; } html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { .disc .rec, h1 span:last-child, .stage *, .stage i, .booth * { animation: none !important; } html { scroll-behavior: auto; } }
 
 @media (max-width: 860px) {
   .sets { grid-template-columns: 1fr; }
@@ -109,6 +145,9 @@ footer a { color: var(--blue); }
 }
 @media (max-width: 480px) {
   body { font-size: 16px; }
+  .beams i { width: 38%; }
+  .stage { height: 320px; }
+  .stage .booth { width: 108%; }
   .hero-row p { font-size: 17px; }
   .btn { width: 100%; justify-content: center; }
   .actions .status { width: 100%; }
@@ -135,6 +174,103 @@ footer a { color: var(--blue); }
       <div class="hero-row">
         <p>Sets, clips and nights out, posted as they happen. Follow along on Instagram, then send a booking brief for your date.</p>
         <a class="btn" href="https://www.instagram.com/dj_prackz/" target="_blank" rel="noopener">Follow @dj_prackz &rarr;</a>
+      </div>
+      <div class="stage" role="img" aria-label="Illustration of a DJ at turntables with a crowd dancing behind">
+        <svg class="crowd" id="crowd" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+        <div class="beams" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <svg class="booth" viewBox="0 0 1000 380" aria-hidden="true">
+          <defs>
+            <filter id="glow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <linearGradient id="deckTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2547"/><stop offset="1" stop-color="#0f0c1d"/></linearGradient>
+            <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a09bc8"/><stop offset=".5" stop-color="#2b2748"/><stop offset="1" stop-color="#a39ecb"/></linearGradient>
+            <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".24"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/><stop offset=".65" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".16"/></linearGradient>
+            <linearGradient id="frontP" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17122e"/><stop offset="1" stop-color="#04030a"/></linearGradient>
+            <radialGradient id="labelC"><stop offset="0" stop-color="#9afaff"/><stop offset="1" stop-color="#19F3FF"/></radialGradient>
+            <radialGradient id="labelM"><stop offset="0" stop-color="#ff9aea"/><stop offset="1" stop-color="#FF2BD6"/></radialGradient>
+          </defs>
+
+          <!-- DJ behind the decks -->
+          <g class="djbob">
+            <path d="M388 220 C388 152 430 118 500 118 C570 118 612 152 612 220 Z" fill="#07050f" stroke="#FF2BD6" stroke-opacity=".55" stroke-width="2"/>
+            <circle cx="500" cy="76" r="32" fill="#0a0716" stroke="#19F3FF" stroke-opacity=".65" stroke-width="2"/>
+            <path d="M465 76 C465 34 535 34 535 76" fill="none" stroke="#1b1730" stroke-width="9" stroke-linecap="round"/>
+            <path d="M465 76 C465 34 535 34 535 76" fill="none" stroke="#19F3FF" stroke-opacity=".8" stroke-width="1.6" stroke-linecap="round" transform="translate(0 -4.5)"/>
+            <rect x="455" y="64" width="15" height="30" rx="7" fill="#1b1730" stroke="#19F3FF" stroke-width="2" filter="url(#glow)"/>
+            <rect x="530" y="64" width="15" height="30" rx="7" fill="#1b1730" stroke="#19F3FF" stroke-width="2" filter="url(#glow)"/>
+          </g>
+
+          <!-- controller body -->
+          <path d="M70 288 L120 200 L880 200 L930 288 Z" fill="url(#deckTop)" stroke="#4a4380" stroke-width="1.5"/>
+          <line x1="120" y1="200.5" x2="880" y2="200.5" stroke="#7a72c0" stroke-opacity=".7"/>
+          <rect x="70" y="288" width="860" height="14" fill="#0b0918" stroke="#3a3470"/>
+
+          <!-- left deck -->
+          <g transform="translate(298 244) scale(1 .29)">
+            <circle r="122" fill="none" stroke="#19F3FF" stroke-width="5" opacity=".9"/>
+            <circle r="118" fill="url(#chrome)"/>
+            <g class="spin">
+              <circle r="105" fill="#07060d"/>
+              <circle r="96" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="86" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="76" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="66" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="56" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="41" fill="url(#labelC)"/>
+              <path d="M0 -41 L0 -105" stroke="#e8e4ff" stroke-width="4" stroke-opacity=".75"/>
+              <circle cx="0" cy="-72" r="5" fill="#FF2BD6"/>
+              <circle r="7" fill="#07060f"/>
+            </g>
+            <circle r="105" fill="url(#sheen)"/>
+          </g>
+          <!-- right deck -->
+          <g transform="translate(702 244) scale(1 .29)">
+            <circle r="122" fill="none" stroke="#FF2BD6" stroke-width="5" opacity=".9"/>
+            <circle r="118" fill="url(#chrome)"/>
+            <g class="spin">
+              <circle r="105" fill="#07060d"/>
+              <circle r="96" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="86" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="76" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="66" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="56" fill="none" stroke="#2a2450" stroke-width="2"/>
+              <circle r="41" fill="url(#labelM)"/>
+              <path d="M0 -41 L0 -105" stroke="#e8e4ff" stroke-width="4" stroke-opacity=".75"/>
+              <circle cx="0" cy="-72" r="5" fill="#19F3FF"/>
+              <circle r="7" fill="#07060f"/>
+            </g>
+            <circle r="105" fill="url(#sheen)"/>
+          </g>
+
+          <!-- mixer -->
+          <path d="M426 205 L574 205 L580 284 L420 284 Z" fill="#0d0a1a" stroke="#4a4380"/>
+          <g id="knobs"></g>
+          <line x1="448" y1="252" x2="448" y2="278" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+          <line x1="552" y1="252" x2="552" y2="278" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+          <rect class="cap" x="441" y="254" width="14" height="8" rx="2" fill="#c9c4ee" stroke="#19F3FF" style="--m:12px;--d:2.1s"/>
+          <rect class="cap" x="545" y="254" width="14" height="8" rx="2" fill="#c9c4ee" stroke="#FF2BD6" style="--m:9px;--d:1.7s"/>
+          <g id="vu"></g>
+          <line x1="462" y1="279" x2="538" y2="279" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+          <rect class="xcap" x="494" y="275" width="12" height="8" rx="2" fill="#e8e4ff" stroke="#C6FF2E"/>
+          <g id="padsL"></g>
+          <g id="padsR"></g>
+
+          <!-- DJ arms on the platters -->
+          <g transform="translate(428 150)"><g class="djarm l">
+            <path d="M0 0 Q-62 36 -108 78" fill="none" stroke="#FF2BD6" stroke-opacity=".5" stroke-width="30" stroke-linecap="round"/>
+            <path d="M0 0 Q-62 36 -108 78" fill="none" stroke="#07050f" stroke-width="26" stroke-linecap="round"/>
+            <circle cx="-108" cy="82" r="14" fill="#07050f" stroke="#FF2BD6" stroke-opacity=".5" stroke-width="2"/>
+          </g></g>
+          <g transform="translate(572 150)"><g class="djarm r">
+            <path d="M0 0 Q62 36 108 78" fill="none" stroke="#19F3FF" stroke-opacity=".5" stroke-width="30" stroke-linecap="round"/>
+            <path d="M0 0 Q62 36 108 78" fill="none" stroke="#07050f" stroke-width="26" stroke-linecap="round"/>
+            <circle cx="108" cy="82" r="14" fill="#07050f" stroke="#19F3FF" stroke-opacity=".5" stroke-width="2"/>
+          </g></g>
+
+          <!-- booth front -->
+          <rect x="40" y="302" width="920" height="78" rx="4" fill="url(#frontP)"/>
+          <rect x="40" y="302" width="920" height="3" fill="#FF2BD6" filter="url(#glow)"/>
+          <text x="500" y="352" text-anchor="middle" style="font-family:var(--wordmark);font-size:40px;letter-spacing:4px" fill="#19F3FF" filter="url(#glow)">DJ PRACKZ</text>
+        </svg>
       </div>
       <div class="meter" aria-hidden="true"><canvas id="eq" width="1120" height="120"></canvas></div>
       <div class="meter-cap"><span>Input A &middot; Master</span><span>-18 dB to 0 dB</span></div>
@@ -243,6 +379,85 @@ footer a { color: var(--blue); }
   function loop() { t += 0.016; draw(); requestAnimationFrame(loop); }
   t = 2.4; draw();
   if (!reduce) requestAnimationFrame(loop);
+
+  /* Stage: crowd, mixer details, pads (seeded so the scene is the same every load) */
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var R = rng(11), R2 = rng(5);
+  var crowd = document.getElementById('crowd');
+  if (crowd) {
+    var rows = [
+      { n: 19, y: 168, k: 0.56, fill: '#1a0f3d', op: 0.5 },
+      { n: 20, y: 236, k: 0.76, fill: '#0e0824', op: 0.7 },
+      { n: 15, y: 318, k: 1.0,  fill: '#04030a', op: 0.9 }
+    ];
+    var s = '';
+    rows.forEach(function (row) {
+      for (var i = 0; i < row.n; i++) {
+        var x = (i + 0.5 + (R() - 0.5) * 0.6) * (1200 / row.n);
+        var rim = x < 420 ? '#FF2BD6' : (x > 780 ? '#19F3FF' : '#7B5CFF');
+        var bd = (0.9375 * (R() < 0.5 ? 1 : 2)).toFixed(4);
+        var dl = (-R() * 2).toFixed(2);
+        var mode = R();
+        var st = 'stroke="' + rim + '" stroke-opacity="' + (row.op * 0.7).toFixed(2) + '" stroke-width="2.5"';
+        s += '<g transform="translate(' + x.toFixed(1) + ' ' + row.y + ') scale(' + row.k + ')">';
+        s += '<g class="bob" style="animation-duration:' + bd + 's;animation-delay:' + dl + 's">';
+        s += '<path d="M-30 480 L-30 70 C-30 36 -16 26 0 26 C16 26 30 36 30 70 L30 480 Z" fill="' + row.fill + '" ' + st + '/>';
+        s += '<circle cx="0" cy="0" r="15" fill="' + row.fill + '" ' + st + '/>';
+        [-1, 1].forEach(function (side) {
+          var up = mode < 0.55 || (mode < 0.78 && ((side < 0) === (mode < 0.665)));
+          if (!up) return;
+          var ex = side * (26 + R() * 24), ey = -(46 + R() * 42);
+          var ad = (1.875 * (R() < 0.5 ? 1 : 0.5)).toFixed(3), adl = (-R() * 2).toFixed(2);
+          var d = 'M0 0 Q' + (ex * 0.4).toFixed(1) + ' -20 ' + ex.toFixed(1) + ' ' + ey.toFixed(1);
+          s += '<g transform="translate(' + (side * 22) + ' 44)"><g class="armsw' + (side > 0 ? ' r' : '') + '" style="animation-duration:' + ad + 's;animation-delay:' + adl + 's">';
+          s += '<path d="' + d + '" fill="none" stroke="' + rim + '" stroke-opacity="' + (row.op * 0.5).toFixed(2) + '" stroke-width="14" stroke-linecap="round"/>';
+          s += '<path d="' + d + '" fill="none" stroke="' + row.fill + '" stroke-width="11" stroke-linecap="round"/>';
+          s += '<circle cx="' + ex.toFixed(1) + '" cy="' + ey.toFixed(1) + '" r="7" fill="' + row.fill + '"/>';
+          s += '</g></g>';
+        });
+        s += '</g></g>';
+      }
+    });
+    crowd.innerHTML = s;
+  }
+  var knobs = document.getElementById('knobs');
+  if (knobs) {
+    var k = '';
+    [448, 552].forEach(function (x) { [217, 231, 245].forEach(function (y) {
+      k += '<ellipse cx="' + x + '" cy="' + y + '" rx="7" ry="4.2" fill="#2a2548" stroke="#7d75c4" stroke-width=".8"/>';
+      k += '<line x1="' + x + '" y1="' + y + '" x2="' + (x + 3) + '" y2="' + (y - 3.4) + '" stroke="#19F3FF" stroke-width="1.4" stroke-linecap="round"/>';
+    }); });
+    knobs.innerHTML = k;
+  }
+  var vu = document.getElementById('vu');
+  if (vu) {
+    var v = '';
+    [488, 512].forEach(function (cx) {
+      for (var j = 0; j < 8; j++) {
+        var col = j < 2 ? '#FF3B5C' : (j < 4 ? '#FFC02E' : '#2EFF8A');
+        var an = j < 2 ? 'ledhi' : (j < 4 ? 'ledmid' : 'ledlow');
+        v += '<rect x="' + (cx - 6) + '" y="' + (211 + j * 8) + '" width="12" height="5" rx="1" fill="' + col + '" style="animation:' + an + ' ' + (0.5 + R2() * 0.9).toFixed(2) + 's ease-in-out ' + (-R2() * 2).toFixed(2) + 's infinite"/>';
+      }
+    });
+    vu.innerHTML = v;
+  }
+  function pads(id, x0) {
+    var g = document.getElementById(id); if (!g) return;
+    var cols = ['#FF2BD6', '#19F3FF', '#C6FF2E', '#7B5CFF'], p = '', n = 0;
+    for (var r = 0; r < 4; r++) for (var c = 0; c < 2; c++) {
+      p += '<rect x="' + (x0 + c * 24) + '" y="' + (214 + r * 13) + '" width="22" height="11" rx="2" fill="' + cols[n % 4] + '" style="animation:padpulse ' + (0.9375 * (R2() < 0.5 ? 1 : 2)).toFixed(3) + 's ease-in-out ' + (-R2() * 2).toFixed(2) + 's infinite"/>';
+      n++;
+    }
+    g.innerHTML = p;
+  }
+  pads('padsL', 124); pads('padsR', 830);
 
   /* Booking brief */
   var ids = ['name', 'type', 'date', 'city', 'crowd', 'hours', 'notes'];

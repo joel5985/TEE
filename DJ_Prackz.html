@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>DJ Prackz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tilt+Neon&family=Unbounded:wght@600;800&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: poster-style single page. Oversized wordmark over a live level meter,
+   then sets, a booking brief builder, and a footer. One bold move: the wordmark. */
+:root {
+  /* dark neon: --paper is the night background, --paper-2 the panel, --ink the light text,
+     --blue is neon cyan, --blue-deep is neon magenta, --lime is the third glow */
+  --paper: #07060F;
+  --paper-2: #120F24;
+  --ink: #F3F0FF;
+  --ink-soft: #A59FC9;
+  --blue: #19F3FF;
+  --blue-deep: #FF2BD6;
+  --lime: #C6FF2E;
+  --line: #2E2860;
+  --wordmark: "Tilt Neon", "Arial Black", Impact, sans-serif;
+  --display: "Unbounded", "Arial Black", Impact, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "DM Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: radial-gradient(900px 420px at 88% -4%, rgba(255,43,214,.20), transparent 62%) no-repeat, radial-gradient(760px 420px at 0% 18%, rgba(25,243,255,.14), transparent 62%) no-repeat, var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding-inline: 20px;
+  padding-block: 0;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.wrap { max-width: 1120px; margin-inline: auto; }
+
+/* top bar */
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 18px; font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.bar nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.bar a { text-decoration: none; }
+.bar a:hover { color: var(--blue); }
+
+/* hero */
+.hero { padding-block: 28px 0; }
+.kicker { font-family: var(--mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.kicker .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime), 0 0 22px var(--lime); }
+h1 { font-family: var(--wordmark); font-weight: 400; text-transform: uppercase; line-height: .92; letter-spacing: .01em; margin: 18px 0 0; font-size: clamp(52px, 16.5vw, 210px); max-width: 100%; overflow-wrap: anywhere; }
+h1 span { display: block; }
+h1 span:last-child { color: #FFE9FB; text-shadow: 0 0 4px #fff, 0 0 12px var(--blue-deep), 0 0 28px var(--blue-deep), 0 0 64px rgba(255,43,214,.7); animation: flicker 6s infinite; }
+h1 .dj { font-size: .4em; letter-spacing: .3em; color: #E6FEFF; line-height: 1; margin-bottom: .12em; text-shadow: 0 0 4px #fff, 0 0 12px var(--blue), 0 0 30px var(--blue); }
+@keyframes flicker { 0%, 17%, 19%, 22%, 62%, 64%, 100% { opacity: 1; } 18%, 21%, 63% { opacity: .78; } }
+.hero-row { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: end; margin-top: 28px; }
+.hero-row p { margin: 0; max-width: 46ch; font-size: 19px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 14px; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; background: var(--blue); color: var(--paper); padding: 16px 22px; border: 2px solid var(--blue); cursor: pointer; box-shadow: 0 0 18px rgba(25,243,255,.45); transition: background .15s, color .15s, border-color .15s, box-shadow .15s; }
+.btn:hover { background: var(--blue-deep); border-color: var(--blue-deep); box-shadow: 0 0 22px rgba(255,43,214,.6); }
+.btn.ghost { background: transparent; color: var(--blue); box-shadow: none; }
+.btn.ghost:hover { background: var(--blue); color: var(--paper); border-color: var(--blue); box-shadow: 0 0 18px rgba(25,243,255,.45); }
+.meter { margin-top: 36px; border-block: 2px solid var(--blue-deep); background: #000; box-shadow: 0 0 24px rgba(255,43,214,.25); }
+.meter canvas { display: block; width: 100%; height: 120px; }
+.meter-cap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); padding-block: 10px 0; }
+
+/* sections */
+section { padding-block: 84px 0; }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; border-top: 2px solid var(--blue); padding-top: 14px; }
+.sec-head h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(24px, 5vw, 46px); line-height: 1.05; letter-spacing: -.01em; margin: 0; text-wrap: balance; overflow-wrap: anywhere; min-width: 0; text-shadow: 0 0 18px rgba(25,243,255,.45); }
+.sec-head .tag { font-family: var(--mono); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* sets */
+.sets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 32px; }
+.set { background: var(--paper-2); border: 1px solid var(--line); padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.set .disc { width: 100%; max-width: 220px; aspect-ratio: 1; align-self: center; }
+.set h3 { font-family: var(--display); font-weight: 600; font-size: 20px; line-height: 1.15; margin: 0; letter-spacing: -.005em; }
+.set p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+.set a.more { margin-top: auto; font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue-deep); }
+.set a.more:hover { color: var(--ink); }
+
+/* booking */
+.book { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 40px; margin-top: 32px; align-items: start; }
+.book-copy p { margin: 0 0 14px; max-width: 44ch; }
+.book-copy .handle { font-family: var(--mono); font-size: 15px; letter-spacing: .04em; }
+form { display: grid; gap: 16px; }
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+label { display: grid; gap: 6px; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); min-width: 0; }
+input, select, textarea { font: inherit; font-family: var(--body); font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--ink); background: var(--paper); border: 2px solid var(--line); border-radius: 0; padding: 12px 14px; width: 100%; min-width: 0; }
+textarea { min-height: 96px; resize: vertical; }
+.out { background: #000; color: var(--blue); border: 1px solid var(--blue-deep); box-shadow: 0 0 20px rgba(255,43,214,.2); padding: 18px; font-family: var(--mono); font-size: 14px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; min-height: 120px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.status { font-family: var(--mono); font-size: 13px; color: var(--blue-deep); min-height: 1.2em; }
+
+footer { margin-top: 96px; background: #000; color: var(--ink); border-top: 2px solid var(--blue-deep); box-shadow: 0 -12px 40px rgba(255,43,214,.18); margin-inline: -20px; padding: 40px 20px 48px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: end; }
+footer .big { font-family: var(--wordmark); font-weight: 400; font-size: clamp(34px, 7vw, 64px); text-transform: uppercase; letter-spacing: .02em; line-height: 1; color: #FFE9FB; text-shadow: 0 0 6px var(--blue-deep), 0 0 24px var(--blue-deep); }
+footer small { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+footer a { color: var(--blue); }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.disc .rec { transform-origin: 50% 50%; animation: spin 9s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .disc .rec, h1 span:last-child { animation: none; } html { scroll-behavior: auto; } }
+
+@media (max-width: 860px) {
+  .sets { grid-template-columns: 1fr; }
+  .book { grid-template-columns: 1fr; }
+  .hero-row { grid-template-columns: 1fr; }
+  section { padding-block: 64px 0; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .hero-row p { font-size: 17px; }
+  .btn { width: 100%; justify-content: center; }
+  .actions .status { width: 100%; }
+  .sec-head .tag { font-size: 12px; }
+  .row { grid-template-columns: 1fr; }
+  .bar nav { gap: 14px; }
+}
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <strong>@dj_prackz</strong>
+    <nav aria-label="Page sections">
+      <a href="#sets">Sets</a>
+      <a href="#book">Book</a>
+      <a href="https://www.instagram.com/dj_prackz/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="kicker"><span class="dot"></span><span>Live DJ</span><span>/</span><span>Bookings open</span></div>
+      <h1><span class="dj">DJ</span><span>Prackz</span></h1>
+      <div class="hero-row">
+        <p>Sets, clips and nights out, posted as they happen. Follow along on Instagram, then send a booking brief for your date.</p>
+        <a class="btn" href="https://www.instagram.com/dj_prackz/" target="_blank" rel="noopener">Follow @dj_prackz &rarr;</a>
+      </div>
+      <div class="meter" aria-hidden="true"><canvas id="eq" width="1120" height="120"></canvas></div>
+      <div class="meter-cap"><span>Input A &middot; Master</span><span>-18 dB to 0 dB</span></div>
+    </div>
+
+    <section id="sets">
+      <div class="sec-head"><h2>Sets &amp; clips</h2><span class="tag">Updated on Instagram</span></div>
+      <div class="sets">
+        <article class="set">
+          <svg class="disc" viewBox="0 0 200 200" role="img" aria-label="Spinning record"><g class="rec"><circle cx="100" cy="100" r="96" fill="#000000"/><circle cx="100" cy="100" r="78" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="64" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="50" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="32" fill="#19F3FF"/><path d="M100 68 A32 32 0 0 1 132 100 L100 100 Z" fill="#0AA8B3"/><circle cx="100" cy="100" r="5" fill="#07060F"/></g></svg>
+          <h3>Latest reels</h3>
+          <p>Short clips from the booth: transitions, crowd moments and what is playing right now.</p>
+          <a class="more" href="https://www.instagram.com/dj_prackz/reels/" target="_blank" rel="noopener">Watch reels &rarr;</a>
+        </article>
+        <article class="set">
+          <svg class="disc" viewBox="0 0 200 200" role="img" aria-label="Record with a pale label"><g class="rec"><circle cx="100" cy="100" r="96" fill="#000000"/><circle cx="100" cy="100" r="78" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="64" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="50" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="32" fill="#FF2BD6"/><path d="M100 68 A32 32 0 0 1 132 100 L100 100 Z" fill="#A8148F"/><circle cx="100" cy="100" r="5" fill="#07060F"/></g></svg>
+          <h3>Posts &amp; nights</h3>
+          <p>Photos and flyers from past gigs, plus announcements for the next ones.</p>
+          <a class="more" href="https://www.instagram.com/dj_prackz/" target="_blank" rel="noopener">See the feed &rarr;</a>
+        </article>
+        <article class="set">
+          <svg class="disc" viewBox="0 0 200 200" role="img" aria-label="Record with a dark blue label"><g class="rec"><circle cx="100" cy="100" r="96" fill="#000000"/><circle cx="100" cy="100" r="78" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="64" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="50" fill="none" stroke="#3A3380" stroke-width="1"/><circle cx="100" cy="100" r="32" fill="#C6FF2E"/><path d="M100 68 A32 32 0 0 1 132 100 L100 100 Z" fill="#7FB300"/><circle cx="100" cy="100" r="5" fill="#07060F"/></g></svg>
+          <h3>Stories</h3>
+          <p>Date announcements and set-time changes usually land in stories first.</p>
+          <a class="more" href="https://www.instagram.com/dj_prackz/" target="_blank" rel="noopener">Open profile &rarr;</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="book">
+      <div class="sec-head"><h2>Book a date</h2><span class="tag">Replies via Instagram DM</span></div>
+      <div class="book">
+        <div class="book-copy">
+          <p>Fill in the brief, copy it, and send it as a direct message. A clear date, city and crowd size lets the reply come back with a real answer.</p>
+          <p class="handle">DM &rarr; instagram.com/dj_prackz</p>
+        </div>
+        <div>
+          <form id="brief" autocomplete="off">
+            <div class="row">
+              <label for="f-name">Your name<input id="f-name" type="text" placeholder="Asha Menon"></label>
+              <label for="f-type">Event type
+                <select id="f-type">
+                  <option>Club night</option>
+                  <option>Wedding or sangeet</option>
+                  <option>Private party</option>
+                  <option>Corporate event</option>
+                  <option>College fest</option>
+                  <option>Other</option>
+                </select>
+              </label>
+            </div>
+            <div class="row">
+              <label for="f-date">Date<input id="f-date" type="date"></label>
+              <label for="f-city">City and venue<input id="f-city" type="text" placeholder="Bengaluru, venue name"></label>
+            </div>
+            <div class="row">
+              <label for="f-crowd">Guests<input id="f-crowd" type="number" min="1" inputmode="numeric" placeholder="150"></label>
+              <label for="f-hours">Set length (hours)<input id="f-hours" type="number" min="1" step="0.5" inputmode="decimal" placeholder="3"></label>
+            </div>
+            <label for="f-notes">Anything else<textarea id="f-notes" placeholder="Music you want, start time, sound system on site"></textarea></label>
+          </form>
+          <div class="out" id="out" role="status" aria-live="polite" style="margin-top:18px"></div>
+          <div class="actions" style="margin-top:14px">
+            <button class="btn" type="button" id="copy">Copy brief</button>
+            <a class="btn ghost" href="https://www.instagram.com/dj_prackz/" target="_blank" rel="noopener">Open Instagram &rarr;</a>
+            <span class="status" id="status"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="big">DJ Prackz</div>
+    <small>Instagram &middot; <a href="https://www.instagram.com/dj_prackz/" target="_blank" rel="noopener">@dj_prackz</a></small>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* Level meter: bars settle to a resting frame, animate unless reduced motion is on */
+  var cv = document.getElementById('eq');
+  var ctx = cv.getContext('2d');
+  var N = 64, vals = [], t = 0;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function level(i, t) {
+    var a = Math.sin(i * 0.37 + t * 1.7) * 0.5 + 0.5;
+    var b = Math.sin(i * 0.91 - t * 2.9) * 0.5 + 0.5;
+    var env = 0.35 + 0.65 * Math.pow(Math.sin(Math.PI * (i + 0.5) / N), 0.6);
+    return Math.max(0.06, (a * 0.6 + b * 0.4) * env);
+  }
+  function draw() {
+    var W = cv.width, H = cv.height, gap = 4, bw = (W - gap * (N - 1)) / N;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < N; i++) {
+      var v = level(i, t), h = Math.round(v * (H - 12));
+      var x = i * (bw + gap);
+      var c = v > 0.82 ? '#FF2BD6' : (v > 0.55 ? '#19F3FF' : '#7B5CFF');
+      ctx.shadowColor = c; ctx.shadowBlur = 10;
+      ctx.fillStyle = c;
+      ctx.fillRect(x, H - h - 6, bw, h);
+    }
+  }
+  function loop() { t += 0.016; draw(); requestAnimationFrame(loop); }
+  t = 2.4; draw();
+  if (!reduce) requestAnimationFrame(loop);
+
+  /* Booking brief */
+  var ids = ['name', 'type', 'date', 'city', 'crowd', 'hours', 'notes'];
+  var el = {}; ids.forEach(function (k) { el[k] = document.getElementById('f-' + k); });
+  var out = document.getElementById('out'), status = document.getElementById('status');
+  function fmtDate(v) {
+    if (!v) return 'to be confirmed';
+    var d = new Date(v + 'T00:00:00');
+    return isNaN(d) ? v : d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+  function build() {
+    var lines = [];
+    lines.push('Hi DJ Prackz, booking enquiry.');
+    lines.push('');
+    lines.push('Name: ' + (el.name.value.trim() || 'not given'));
+    lines.push('Event: ' + el.type.value);
+    lines.push('Date: ' + fmtDate(el.date.value));
+    lines.push('Where: ' + (el.city.value.trim() || 'to be confirmed'));
+    lines.push('Guests: ' + (el.crowd.value || 'to be confirmed'));
+    lines.push('Set length: ' + (el.hours.value ? el.hours.value + ' hours' : 'to be confirmed'));
+    if (el.notes.value.trim()) { lines.push(''); lines.push('Notes: ' + el.notes.value.trim()); }
+    lines.push('');
+    lines.push('Are you available, and what would the rate be?');
+    out.textContent = lines.join('\n');
+  }
+  ids.forEach(function (k) { el[k].addEventListener('input', build); el[k].addEventListener('change', build); });
+  document.getElementById('brief').addEventListener('submit', function (e) { e.preventDefault(); });
+  build();
+
+  document.getElementById('copy').addEventListener('click', function () {
+    var text = out.textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(out);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      status.textContent = 'Text selected. Press Ctrl+C or Cmd+C to copy.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () {
+        status.textContent = 'Copied. Paste it into your DM.';
+      }, fallback);
+    } catch (err) { fallback(); }
+  });
+})();
+</script>
+
+</body></html>
